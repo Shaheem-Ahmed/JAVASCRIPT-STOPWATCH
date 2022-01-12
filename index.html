@@ -5,21 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>COUNTDOWN TIMER</title>
+    <title>Document</title>
 </head>
 <body>
-    <input type="text" id="month" placeholder="Month">
- <input type="text" id="day" placeholder="Day">
- <input type="text" id="year" placeholder="Year">
- <input type="text" id="hour" placeholder="Hour">
- <input type="text" id="min" placeholder="Min">
- <input type="button" id="BTN" value="Submit" onclick="settimer();">
- <p id="timer_value"></p>
+    <div id="stopwatch">
+        00:00:00
+    </div>
+
+    <ul id="buttons">
+        <li><button onclick="startTimer()">Start</button></li>
+        <li><button onclick="stopTimer()">Stop</button></li>
+
+        <li><button onclick="resetTimer()">Reset</button></li>
+    </ul>
 
 
-
-
-
-    <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

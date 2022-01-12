@@ -1,42 +1,56 @@
-var timer;
-function settimer()
-{
- clearInterval(timer);
+const timer = document.getElementById('stopwatch');
 
- var timer_month=document.getElementById("month").value;
- var timer_day=document.getElementById("day").value;
- var timer_year=document.getElementById("year").value;
- var timer_hour=document.getElementById("hour").value;
- if(timer_hour=="")timer_hour=0;
- var timer_min=document.getElementById("min").value;
- if(timer_min=="")timer_min=0;
+var hr = 0;
+var min = 0;
+var sec = 0;
+var stoptime = true;
 
- var timer_date=timer_month+"/"+timer_day+"/"+timer_year+" "+timer_hour+":"+timer_min;
- var end = new Date(timer_date);
- var now = new Date(); 
- var second = 1000; 
- var minute = second * 60; 
- var hour = minute * 60; 
- var day = hour * 24; 
-
- function showtimer() {
-  var now = new Date();
-  var remain = end - now;
-  if(remain < 0) 
-  {
-   clearInterval(timer);
-   document.getElementById("timer_value").innerHTML = 'Reached!';
-   return;
+function startTimer() {
+  if (stoptime == true) {
+        stoptime = false;
+        timerCycle();
+    }
+}
+function stopTimer() {
+  if (stoptime == false) {
+    stoptime = true;
   }
-  var days = Math.floor(remain / day); 
-  var hours = Math.floor((remain % day) / hour); 
-  var minutes = Math.floor((remain % hour) / minute); 
-  var seconds = Math.floor((remain % minute) / second); 
- 
-  document.getElementById("timer_value").innerHTML = days + 'Days ';
-  document.getElementById("timer_value").innerHTML += hours + 'Hrs ';
-  document.getElementById("timer_value").innerHTML += minutes + 'Mins ';
-  document.getElementById("timer_value").innerHTML += seconds + 'Secs';
- }
- timer = setInterval(showtimer, 1000); 
+}
+
+function timerCycle() {
+    if (stoptime == false) {
+    sec = parseInt(sec);
+    min = parseInt(min);
+    hr = parseInt(hr);
+
+    sec = sec + 1;
+
+    if (sec == 60) {
+      min = min + 1;
+      sec = 0;
+    }
+    if (min == 60) {
+      hr = hr + 1;
+      min = 0;
+      sec = 0;
+    }
+
+    if (sec < 10 || sec == 0) {
+      sec = '0' + sec;
+    }
+    if (min < 10 || min == 0) {
+      min = '0' + min;
+    }
+    if (hr < 10 || hr == 0) {
+      hr = '0' + hr;
+    }
+
+    timer.innerHTML = hr + ':' + min + ':' + sec;
+
+    setTimeout("timerCycle()", 1000);
+  }
+}
+
+function resetTimer() {
+    timer.innerHTML = '00:00:00';
 }
